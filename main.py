@@ -25,10 +25,10 @@ def str2bool(str):
 #########################
 #### data parameters ####
 #########################
-parser.add_argument("--dataset", type=str, default="wiki") # wiki xmedia INRIA-Websearch xmedianet 
+parser.add_argument("--dataset", type=str, default="xmedia") # wiki xmedia INRIA-Websearch xmedianet 
 parser.add_argument("--seed", type=int, default=10)
-parser.add_argument("--alpha", type=float, default=0.05) #MC 0.05 0.10 0.30 0.05
-parser.add_argument("--gamma", type=float, default=4) # 3 5 8 9
+parser.add_argument("--alpha", type=float, default=0.1) #MC 0.05 0.10 0.30 0.05
+parser.add_argument("--gamma", type=float, default=5) # 3 5 8 9
 parser.add_argument("--lamda", type=float, default=1) # LS
 parser.add_argument("--MAX_EPOCH", type=int, default=150)
 parser.add_argument("--batch_size", type=int, default=256)

@@ -67,7 +67,7 @@ def get_loader(data_name, batch_size, noisy_ratio, noise_mode):
     np.random.seed(1)
     if data_name == 'wiki':
         valid_len = 231
-        path = '/home/qinyang/windows/sda1/ProjectsOfQy/NoisyLabel/PRT_projects/MARS_DRSL/datasets/Wiki/wiki.mat'
+        path = 'datasets/wiki.mat'
         data = sio.loadmat(path)
         img_train = data['train_imgs_deep']
         text_train = data['train_texts_doc']
@@ -86,7 +86,7 @@ def get_loader(data_name, batch_size, noisy_ratio, noise_mode):
         label_test_img = label_test_img[valid_len:]
     elif data_name == 'xmedia':
         valid_len = 500
-        path = '/home/qinyang/windows/sda1/ProjectsOfQy/NoisyLabel/PRT_projects/MARS_DRSL/datasets/XMedia/XMediaFeatures.mat'
+        path = 'datasets/XMediaFeatures.mat'
         all_data = sio.loadmat(path)
         img_test = all_data['I_te_CNN'].astype('float32')   # Features of test set for image data, CNN feature
         img_train = all_data['I_tr_CNN'].astype('float32')   # Features of training set for image data, CNN feature
@@ -104,7 +104,7 @@ def get_loader(data_name, batch_size, noisy_ratio, noise_mode):
         text_test =  text_test[valid_len:]
         label_test_img = label_test_img[valid_len:]
     elif data_name == 'INRIA-Websearch':
-        path = '/home/qinyang/windows/sda1/ProjectsOfQy/NoisyLabel/CrossNL/DSCMR/newData/INRIA-Websearch/INRIA-Websearch.mat'
+        path = 'datasets/INRIA-Websearch.mat'
         data = sio.loadmat(path)
         img_train = data['tr_img'].astype('float32')
         text_train = data['tr_txt'].astype('float32')
@@ -119,10 +119,7 @@ def get_loader(data_name, batch_size, noisy_ratio, noise_mode):
         label_test_img = data['te_img_lab'].reshape([-1,1]).astype('int16') 
     elif data_name == 'xmedianet':
         valid_len = 4000
-        path = '/home/qinyang/windows/sda1/ProjectsOfQy/NoisyLabel/CrossNL/DSCMR/newData/xmedianet_deep_doc2vec_data.h5py'
-        with h5py.File(path, 'r') as file:
-            groups = list(file.keys())
-        path = '/home/qinyang/windows/sda1/ProjectsOfQy/NoisyLabel/CrossNL/DSCMR/newData/XMediaNet5View_Doc2Vec.mat'
+        path = 'datasets/XMediaNet5View_Doc2Vec.mat'
         all_data = sio.loadmat(path)
         all_train_data = all_data['train'][0]
         all_train_labels = all_data['train_labels'][0]
@@ -144,8 +141,6 @@ def get_loader(data_name, batch_size, noisy_ratio, noise_mode):
         label_test_img = all_test_labels[0].reshape([-1,1]).astype('int64') 
 
         
-
-
     img_train = img_train.astype('float32')
     img_valid = img_valid.astype('float32')
     img_test = img_test.astype('float32')
@@ -160,7 +155,7 @@ def get_loader(data_name, batch_size, noisy_ratio, noise_mode):
         label_valid = ind2vec(label_valid.reshape([-1,1])).astype('int16') 
         label_test = ind2vec(label_test.reshape([-1,1])).astype('int16') 
     print('train shape: ', img_train.shape[0], 'valid shape:', img_valid.shape[0], 'test shape:', img_test.shape[0])
-    root_dir = '/home/qinyang/windows/sda1/ProjectsOfQy/NoisyLabel/PRT_projects/datasets/noisy_labels'
+    root_dir = 'noisy_labels'
     noise_file = os.path.join(root_dir, data_name + '_noise_labels_%g_' %noisy_ratio) + noise_mode + '.mat'
     if os.path.exists(noise_file):
         label_noisy = sio.loadmat(noise_file)['noisy_label']
